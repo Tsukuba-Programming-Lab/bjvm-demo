@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    compileOnly(files("libs/bjvm-webapi-bindings.jar"))
 }
 
 tasks.jar {
