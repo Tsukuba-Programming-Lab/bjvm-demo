@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chat App | bJVM Demo</title>
+</head>
+<body>
+<header class="header">
+    <h1>Chat App | bJVM Demo</h1>
+</header>
+<main class="container">
+    <div>
+        <section class="create-container">
+            <h2>新規投稿</h2>
+            <textarea id="newPost" placeholder="おなかすいたよ〜"></textarea>
+            <div class="create-bottom">
+                <input id="name" type="text" placeholder="名前" value="名無し">
+                <p>
+                    <span id="textCount">0</span><span class="unit">文字</span>
+                </p>
+            </div>
+            <button id="postButton">投稿する</button>
+        </section>
+        <section class="links-container">
+            <h2>リンク等</h2>
+            <article>
+                <h3>GitHub</h3>
+                <p><a href="https://bjvm-demo.itsu.dev/">https://bjvm-demo.itsu.dev/</a></p>
+                <img src="images/qrcode_dummy.png" alt="QRコード"/>
+            </article>
+        </section>
+    </div>
+    <div>
+        <section class="posts-container">
+            <h2>みんなの投稿</h2>
+            <div id="posts">
+                <article class="post">
+                    <header>
+                        <div>
+                            <img alt="ユーザ画像"
+                                 src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-u61ZQPWv4uospSzPDLLBmr_3DeqacUAZarynzB9pJYxUoxPakMDw6RY-0wodVerLcJaaPnVojNRAsVucke_E46aLieQKp-iaXrl0fRB3rZNO7E4tdw_v7RS5UPELxoOjyZNVTXW0kMI/s170/animal_kuma.png"/>
+                            <p class="name">テストユーザ</p>
+                        </div>
+                        <p class="date">2025/2/15</p>
+                    </header>
+                    <main>
+                        <p class="text">
+                            あなたは今毫もその観念打ってののために至っますで。とうとう一生が思案ようもどうもその相違ないましなどを過ぎてしまうだをは観念やっますまして、だんだんにはきめうだないます。骨とよっでのは同時にほかをよくうなかっない。</p>
+                    </main>
+                </article>
+                <article class="post">
+                    <header>
+                        <div>
+                            <img alt="ユーザ画像"
+                                 src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-u61ZQPWv4uospSzPDLLBmr_3DeqacUAZarynzB9pJYxUoxPakMDw6RY-0wodVerLcJaaPnVojNRAsVucke_E46aLieQKp-iaXrl0fRB3rZNO7E4tdw_v7RS5UPELxoOjyZNVTXW0kMI/s170/animal_kuma.png"/>
+                            <p class="name">テストユーザ</p>
+                        </div>
+                        <p class="date">2025/2/15</p>
+                    </header>
+                    <main>
+                        <p class="text">
+                            あなたは今毫もその観念打ってののために至っますで。とうとう一生が思案ようもどうもその相違ないましなどを過ぎてしまうだをは観念やっますまして、だんだんにはきめうだないます。骨とよっでのは同時にほかをよくうなかっない。</p>
+                    </main>
+                </article>
+                <article class="post">
+                    <header>
+                        <div>
+                            <img alt="ユーザ画像"
+                                 src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-u61ZQPWv4uospSzPDLLBmr_3DeqacUAZarynzB9pJYxUoxPakMDw6RY-0wodVerLcJaaPnVojNRAsVucke_E46aLieQKp-iaXrl0fRB3rZNO7E4tdw_v7RS5UPELxoOjyZNVTXW0kMI/s170/animal_kuma.png"/>
+                            <p class="name">テストユーザ</p>
+                        </div>
+                        <p class="date">2025/2/15</p>
+                    </header>
+                    <main>
+                        <p class="text">
+                            あなたは今毫もその観念打ってののために至っますで。とうとう一生が思案ようもどうもその相違ないましなどを過ぎてしまうだをは観念やっますまして、だんだんにはきめうだないます。骨とよっでのは同時にほかをよくうなかっない。</p>
+                    </main>
+                </article>
+                <article class="post">
+                    <header>
+                        <div>
+                            <img alt="ユーザ画像"
+                                 src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-u61ZQPWv4uospSzPDLLBmr_3DeqacUAZarynzB9pJYxUoxPakMDw6RY-0wodVerLcJaaPnVojNRAsVucke_E46aLieQKp-iaXrl0fRB3rZNO7E4tdw_v7RS5UPELxoOjyZNVTXW0kMI/s170/animal_kuma.png"/>
+                            <p class="name">テストユーザ</p>
+                        </div>
+                        <p class="date">2025/2/15</p>
+                    </header>
+                    <main>
+                        <p class="text">
+                            あなたは今毫もその観念打ってののために至っますで。とうとう一生が思案ようもどうもその相違ないましなどを過ぎてしまうだをは観念やっますまして、だんだんにはきめうだないます。骨とよっでのは同時にほかをよくうなかっない。</p>
+                    </main>
+                </article>
+            </div>
+        </section>
+    </div>
+</main>
+
+<div id="stdOut"></div>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
