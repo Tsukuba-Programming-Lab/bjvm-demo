@@ -153,13 +153,21 @@ textarea, input[type="text"] {
             margin: 0.5rem 2px;
         }
 
-        p {
-            text-align: right;
-            margin: 0;
+        div {
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+
+            p {
+                text-align: right;
+                margin: 0;
+            }
 
             #textCount {
                 font-size: 1.5rem;
                 margin-right: 0.3rem;
+                line-height: 1.6rem;
             }
         }
     }

@@ -10,6 +10,10 @@ try {
         stdOutHandler: (text: string) => {
             stdOut.innerHTML += `<span>${text}</span>`;
         },
+        externalLibraries: [
+            await fetchAsUint8Array("java/lib/dom.zip"),
+            await fetchAsUint8Array("java/lib/bjvm-webapi-bindings.jar"),
+        ],
     };
 
     await launchBJVM(await fetchAsUint8Array("java/app.jar"), options);
