@@ -11,6 +11,9 @@ repositories {
 
 dependencies {
     compileOnly(files("libs/bjvm-webapi-bindings.jar"))
+    compileOnly("org.projectlombok:lombok:1.18.22")
+
+    annotationProcessor("org.projectlombok:lombok:1.18.22")
 }
 
 tasks.jar {

@@ -175,7 +175,7 @@ textarea, input[type="text"] {
 
 .links-container {
     img {
-        width: 50%;
+        width: 70%;
         border: solid 1px var(--color-border);
         border-radius: var(--border-radius);
     }
