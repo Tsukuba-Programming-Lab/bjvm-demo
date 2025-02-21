@@ -48,6 +48,8 @@ public class Main {
 //                posts.appendChild(postElement);
 
                 System.out.println(post);
+
+                $.alert("Posted!");
             }
         });
     }
