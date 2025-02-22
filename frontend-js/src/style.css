@@ -184,7 +184,7 @@ textarea, input[type="text"] {
 .posts-container {
     #posts {
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
         gap: 1rem;
 
         .post {

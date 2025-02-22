@@ -44,22 +44,20 @@ public class Main {
                 }
 
                 var post = new Post(id++, nameValue, "2025/2/15", textValue);
-//                var postElement = createPostElement(post);
-//                posts.appendChild(postElement);
+                var postElement = createPostElement(post);
+                posts.appendChild(postElement);
 
                 System.out.println(post);
-
-                $.alert("Posted!");
             }
         });
     }
 
     private static HTMLElement createPostElement(Post post) {
-        var imgElement = $.document.<HTMLImageElement>createElementG("img");
+        var imgElement = $.document.<HTMLImgElement>createElementG("img");
         imgElement.setSrc("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-u61ZQPWv4uospSzPDLLBmr_3DeqacUAZarynzB9pJYxUoxPakMDw6RY-0wodVerLcJaaPnVojNRAsVucke_E46aLieQKp-iaXrl0fRB3rZNO7E4tdw_v7RS5UPELxoOjyZNVTXW0kMI/s170/animal_kuma.png");
         imgElement.setAlt("User Icon");
 
-        var nameElement = $.document.<HTMLPElement>createElementG("img");
+        var nameElement = $.document.<HTMLPElement>createElementG("p");
         nameElement.setClassName("name");
         nameElement.setTextContent(post.getName());
 
