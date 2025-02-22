@@ -1,18 +1,18 @@
 import launchBJVM from 'bjvm';
 import './style.css';
 
-const fetchBinary = async (path: string): Promise<Uint8Array> =>  {
+const fetchBinary = async (path) =>  {
     return new Uint8Array(await (await fetch(path)).arrayBuffer());
 }
 
 try {
     (async () => {
-        const stdOut = document.getElementById("stdOut")!;
+        const stdOut = document.getElementById("stdOut");
         const options = {
-            stdErrHandler: (text: string) => {
+            stdErrHandler: (text) => {
                 stdOut.innerHTML += `<span style="color: red;">${text}</span>`;
             },
-            stdOutHandler: (text: string) => {
+            stdOutHandler: (text) => {
                 stdOut.innerHTML += `<span>${text}</span>`;
             },
             externalLibraries: [
