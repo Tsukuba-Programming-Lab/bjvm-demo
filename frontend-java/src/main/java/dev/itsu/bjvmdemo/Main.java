@@ -12,11 +12,11 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello from Main.java!");
 
-        var posts = (HTMLDivElement) $.document.getElementById("posts");
-        var newPost = (HTMLTextareaElement) $.document.getElementById("newPost");
-        var name = (HTMLInputElement) $.document.getElementById("name");
-        var textCount = (HTMLPElement) $.document.getElementById("textCount");
-        var postButton = (HTMLButtonElement) $.document.getElementById("postButton");
+        var posts = $.document.<HTMLDivElement>getElementByIdG("posts");
+        var newPost = $.document.<HTMLTextareaElement>getElementByIdG("newPost");
+        var name = $.document.<HTMLInputElement>getElementByIdG("name");
+        var textCount = $.document.<HTMLPElement>getElementByIdG("textCount");
+        var postButton = $.document.<HTMLButtonElement>getElementByIdG("postButton");
 
         newPost.addEventListener("input", new EventListener() {
             @Override
@@ -55,34 +55,34 @@ public class Main {
     }
 
     private static HTMLElement createPostElement(Post post) {
-        var imgElement = (HTMLImageElement) $.document.createElement("img");
+        var imgElement = $.document.<HTMLImageElement>createElementG("img");
         imgElement.setSrc("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-u61ZQPWv4uospSzPDLLBmr_3DeqacUAZarynzB9pJYxUoxPakMDw6RY-0wodVerLcJaaPnVojNRAsVucke_E46aLieQKp-iaXrl0fRB3rZNO7E4tdw_v7RS5UPELxoOjyZNVTXW0kMI/s170/animal_kuma.png");
         imgElement.setAlt("User Icon");
 
-        var nameElement = (HTMLPElement) $.document.createElement("img");
+        var nameElement = $.document.<HTMLPElement>createElementG("img");
         nameElement.setClassName("name");
         nameElement.setTextContent(post.getName());
 
-        var divElement = (HTMLDivElement) $.document.createElement("div");
+        var divElement =  $.document.<HTMLDivElement>createElementG("div");
         divElement.appendChild(imgElement);
         divElement.appendChild(nameElement);
 
-        var dateElement = (HTMLPElement) $.document.createElement("p");
+        var dateElement = $.document.<HTMLPElement>createElementG("p");
         dateElement.setClassName("date");
         dateElement.setTextContent(post.getDate());
 
-        var headerElement = (HTMLHeaderElement) $.document.createElement("header");
+        var headerElement = $.document.<HTMLHeaderElement>createElementG("header");
         headerElement.appendChild(divElement);
         headerElement.appendChild(dateElement);
 
-        var textElement = (HTMLPElement) $.document.createElement("p");
+        var textElement = $.document.<HTMLPElement>createElementG("p");
         textElement.setClassName("text");
         textElement.setTextContent(post.getText());
 
-        var mainElement = (HTMLMainElement) $.document.createElement("main");
+        var mainElement = $.document.<HTMLMainElement>createElementG("main");
         mainElement.appendChild(textElement);
 
-        var postElement = (HTMLArticleElement) $.document.createElement("article");
+        var postElement = $.document.<HTMLArticleElement>createElementG("article");
         postElement.setClassName("post");
         postElement.appendChild(headerElement);
         postElement.appendChild(mainElement);
