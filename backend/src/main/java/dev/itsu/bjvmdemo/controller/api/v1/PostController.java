@@ -13,7 +13,7 @@ public class PostController {
         return List.of();
     }
 
-    @PostMapping("/post")
+    @PutMapping("/post")
     public String post(@RequestParam String userName, @RequestParam String text) {
         return text;
     }
