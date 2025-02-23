@@ -1,13 +1,19 @@
 package dev.itsu.bjvmdemo;
 
 import dev.itsu.bjvm.*;
+import dev.itsu.bjvm.apis.fetch.RequestInit;
 import dev.itsu.dom.html.*;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 
+import java.util.HashMap;
+
 public class Main {
 
     private static int id = 0;
+    private static final HashMap<String, String> HEADERS = new HashMap<>() {{
+        put("Content-Type", "application/x-www-form-urlencoded");
+    }};
 
     public static void main(String[] args) {
         System.out.println("Hello from Main.java!");
@@ -46,6 +52,13 @@ public class Main {
                 var post = new Post(id++, nameValue, "2025/2/15", textValue);
                 var postElement = createPostElement(post);
                 posts.appendChild(postElement);
+
+                var result = $.fetch("api/v1/post", RequestInit.builder()
+                        .method("PUT")
+                        .body("userName=" + nameValue + "&text=" + textValue)
+                        .headers(HEADERS)
+                        .build()
+                );
 
                 System.out.println(post);
             }
