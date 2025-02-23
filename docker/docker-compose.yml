@@ -1,0 +1,25 @@
+services:
+  mysql:
+    build: ./mysql
+    container_name: mysql
+    env_file:
+      - ./mysql/db.env # MySQL設定ファイル
+    volumes:
+      - ./mysql/data:/var/lib/mysql # 実データの永続化
+      - ./mysql/log:/var/log/mysql # logの永続化
+    ports:
+      - 3306:3306
+  java:
+    image: openjdk:17
+    container_name: java
+    env_file:
+      - ./mysql/db.env # mysqlと同じものを指定
+    tty: true
+    working_dir: /app
+    volumes:
+      - ../backend:/app # Spring Bootのプロジェクト
+    ports:
+      - 8080:8080 # 通常実行
+      - 5050:5050 # デバッグ用
+    depends_on:
+      - mysql # 「mysql」の後で起動
