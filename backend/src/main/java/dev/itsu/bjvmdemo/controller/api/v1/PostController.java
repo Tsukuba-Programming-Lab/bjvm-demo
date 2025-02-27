@@ -1,5 +1,9 @@
 package dev.itsu.bjvmdemo.controller.api.v1;
 
+import dev.itsu.bjvmdemo.model.Post;
+import dev.itsu.bjvmdemo.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,14 +12,21 @@ import java.util.List;
 @RequestMapping("api/v1")
 public class PostController {
 
+    private final PostRepository repository;
+
+    public PostController(PostRepository repository) {
+        this.repository = repository;
+    }
+
     @GetMapping("/posts")
-    public List<String> posts() {
-        return List.of();
+    public List<Post> posts() {
+        return repository.findAll(Sort.by(Sort.Direction.DESC, "date"));
     }
 
     @PutMapping("/post")
-    public String post(@RequestParam String userName, @RequestParam String text) {
-        return text;
+    public Post post(@ModelAttribute Post post) {
+        repository.save(post);
+        return post;
     }
 
 }

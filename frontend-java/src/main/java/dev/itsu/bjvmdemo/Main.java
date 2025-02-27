@@ -49,18 +49,20 @@ public class Main {
                     return;
                 }
 
+                System.out.println("Posting...");
+
                 var post = new Post(id++, nameValue, "2025/2/15", textValue);
                 var postElement = createPostElement(post);
                 posts.appendChild(postElement);
 
                 var result = $.fetch("api/v1/post", RequestInit.builder()
                         .method("PUT")
-                        .body("userName=" + nameValue + "&text=" + textValue)
+                        .body("name=" + nameValue + "&text=" + textValue)
                         .headers(HEADERS)
                         .build()
                 );
 
-                System.out.println(post);
+                System.out.println("Posted!: " + post);
             }
         });
     }
