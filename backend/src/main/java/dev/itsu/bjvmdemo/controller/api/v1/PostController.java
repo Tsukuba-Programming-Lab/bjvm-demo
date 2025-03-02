@@ -20,7 +20,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public List<Post> posts() {
-        return repository.findAll(Sort.by(Sort.Direction.DESC, "date"));
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "date"));
     }
 
     @PutMapping("/post")

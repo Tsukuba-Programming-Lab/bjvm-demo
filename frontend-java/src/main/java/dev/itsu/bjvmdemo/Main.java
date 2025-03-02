@@ -65,6 +65,14 @@ public class Main {
                 System.out.println("Posted!: " + post.getSId());
             }
         });
+
+        System.out.println("Fetching posts...");
+
+        var postsList = $.fetch("api/v1/posts").json(Post[].class);
+        for (var post : postsList) {
+            var postElement = createPostElement(post);
+            posts.appendChild(postElement);
+        }
     }
 
     private static HTMLElement createPostElement(Post post) {
