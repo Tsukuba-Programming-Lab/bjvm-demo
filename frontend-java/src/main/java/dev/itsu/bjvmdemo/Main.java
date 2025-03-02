@@ -11,7 +11,6 @@ import java.util.HashMap;
 
 public class Main {
 
-    private static int id = 0;
     private static final HashMap<String, String> HEADERS = new HashMap<>() {{
         put("Content-Type", "application/x-www-form-urlencoded");
     }};
@@ -24,6 +23,7 @@ public class Main {
         var name = $.document.<HTMLInputElement>getElementByIdG("name");
         var textCount = $.document.<HTMLPElement>getElementByIdG("textCount");
         var postButton = $.document.<HTMLButtonElement>getElementByIdG("postButton");
+
 
         newPost.addEventListener("input", new EventListener() {
             @Override
@@ -39,18 +39,18 @@ public class Main {
                 var textValue = newPost.getValue();
                 var textLength = textValue.length();
                 if (textLength == 0) {
-                    $.alert("Post cannot be empty!");
+                    $.alert("1 文字以上入力してください！");
                     return;
                 }
 
                 var nameValue = name.getValue();
                 var nameLength = nameValue.length();
                 if (nameLength == 0) {
-                    $.alert("Name cannot be empty!");
+                    $.alert("名前は空にできません！");
                     return;
                 }
 
-                System.out.println("Posting...");
+                System.out.println("投稿中...");
 
                 var post = $.fetch("api/v1/post", RequestInit.builder()
                         .method("PUT")
@@ -62,11 +62,11 @@ public class Main {
                 var postElement = createPostElement(post);
                 posts.appendChild(postElement);
 
-                System.out.println("Posted!: " + post.getSId());
+                System.out.println("投稿完了：" + post.getSId());
             }
         });
 
-        System.out.println("Fetching posts...");
+        System.out.println("投稿を取得中...");
 
         var postsList = $.fetch("api/v1/posts").json(Post[].class);
         for (var post : postsList) {
