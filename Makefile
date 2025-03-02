@@ -4,6 +4,9 @@ PATH := ${JAVA_HOME}/bin:${PATH}
 run:
 		set -a && source .env.internal && set +a && ssh $${DEPLOY_HOST} "java -jar /app/app.jar"
 
+kill:
+		set -a && source .env.internal && set +a && ssh $${DEPLOY_HOST} "kill $(ps aux | grep 'java -jar' | awk '{print $2}' | head -n 1)"
+
 deploy:
 		set -a && source .env.internal && set +a && scp -r ./backend/build/libs/app.jar $${DEPLOY_HOST}:/app
 

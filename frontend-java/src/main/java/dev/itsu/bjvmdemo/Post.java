@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 public class Post {
 
-    int id;
+    String sId;
 
     @NonNull
     String name;

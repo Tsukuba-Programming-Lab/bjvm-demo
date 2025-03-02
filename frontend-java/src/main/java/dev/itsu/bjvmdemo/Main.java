@@ -6,6 +6,7 @@ import dev.itsu.dom.html.*;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 public class Main {
@@ -51,18 +52,17 @@ public class Main {
 
                 System.out.println("Posting...");
 
-                var post = new Post(id++, nameValue, "2025/2/15", textValue);
-                var postElement = createPostElement(post);
-                posts.appendChild(postElement);
-
-                var result = $.fetch("api/v1/post", RequestInit.builder()
+                var post = $.fetch("api/v1/post", RequestInit.builder()
                         .method("PUT")
                         .body("name=" + nameValue + "&text=" + textValue)
                         .headers(HEADERS)
                         .build()
-                );
+                ).json(Post.class);
 
-                System.out.println("Posted!: " + post);
+                var postElement = createPostElement(post);
+                posts.appendChild(postElement);
+
+                System.out.println("Posted!: " + post.getSId());
             }
         });
     }
@@ -82,7 +82,19 @@ public class Main {
 
         var dateElement = $.document.<HTMLPElement>createElementG("p");
         dateElement.setClassName("date");
-        dateElement.setTextContent(post.getDate());
+
+        // To make error for demo
+        if (post.getText().equals("testdate")) {
+            try {
+                var date = new SimpleDateFormat().parse(post.getDate());
+                var formatedDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(date);
+                dateElement.setTextContent(formatedDate);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            dateElement.setTextContent(post.getDate());
+        }
 
         var headerElement = $.document.<HTMLHeaderElement>createElementG("header");
         headerElement.appendChild(divElement);
