@@ -77,7 +77,7 @@ public class Main {
 
     private static HTMLElement createPostElement(Post post) {
         var imgElement = $.document.<HTMLImgElement>createElementG("img");
-        imgElement.setSrc("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-u61ZQPWv4uospSzPDLLBmr_3DeqacUAZarynzB9pJYxUoxPakMDw6RY-0wodVerLcJaaPnVojNRAsVucke_E46aLieQKp-iaXrl0fRB3rZNO7E4tdw_v7RS5UPELxoOjyZNVTXW0kMI/s170/animal_kuma.png");
+        imgElement.setSrc("images/monster11.png");
         imgElement.setAlt("User Icon");
 
         var nameElement = $.document.<HTMLPElement>createElementG("p");

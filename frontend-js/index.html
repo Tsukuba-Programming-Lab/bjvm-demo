@@ -12,8 +12,8 @@
 <main class="container">
     <div>
         <section class="create-container">
-            <h2>New Post</h2>
-            <textarea id="newPost" placeholder="I'm hungry..."></textarea>
+            <h2>新規投稿</h2>
+            <textarea id="newPost" placeholder="おなかすいたな"></textarea>
             <div class="create-bottom">
                 <input id="name" type="text" placeholder="name" value="no name">
                 <div>
@@ -21,39 +21,27 @@
                     <p class="unit"></p>
                 </div>
             </div>
-            <button id="postButton">Post!</button>
+            <button id="postButton">投稿</button>
         </section>
         <section class="links-container">
-            <h2>Links</h2>
+            <h2>リンク</h2>
             <article>
                 <h3>GitHub</h3>
                 <p><a href="https://github.com/Tsukuba-Programming-Lab/bjvm-demo">https://github.com/Tsukuba-Programming-Lab/bjvm-demo</a></p>
-                <img src="images/qrcode_dummy.png" alt="QR code"/>
+                <img src="images/github.png" alt="QR code"/>
             </article>
         </section>
     </div>
     <div>
         <section class="posts-container">
-            <h2>Timeline</h2>
-            <div id="posts">
-                <article class="post">
-                    <header>
-                        <div>
-                            <img alt="ユーザ画像"
-                                 src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-u61ZQPWv4uospSzPDLLBmr_3DeqacUAZarynzB9pJYxUoxPakMDw6RY-0wodVerLcJaaPnVojNRAsVucke_E46aLieQKp-iaXrl0fRB3rZNO7E4tdw_v7RS5UPELxoOjyZNVTXW0kMI/s170/animal_kuma.png"/>
-                            <p class="name">Test User</p>
-                        </div>
-                        <p class="date">2025/2/15</p>
-                    </header>
-                    <main>
-                        <p class="text">This is the first post.</p>
-                    </main>
-                </article>
-            </div>
+            <h2>みんなの投稿</h2>
+            <!-- ここに投稿が挿入される -->
+            <div id="posts"></div>
         </section>
     </div>
 </main>
 
+<!-- bJVM 標準出力用 -->
 <div id="stdOut"></div>
 
 <script type="module" src="/src/main.js"></script>
