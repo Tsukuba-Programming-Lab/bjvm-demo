@@ -73,12 +73,18 @@ public class Main {
 
         var posts = $.document.<HTMLDivElement>getElementByIdG("posts");
         var postsList = $.fetch("api/v1/posts").json(Post[].class);
+        var i = 0;
+
         for (var post : postsList) {
+            if (post.getText().equals("testdate")) {
+                i++;
+                continue;
+            }
             var postElement = createPostElement(post);
             posts.appendChild(postElement);
         }
 
-        System.out.println(postsList.length + "件を取得しました！");
+        System.out.println((postsList.length  - i) + "件を取得しました！");
     }
 
     private static HTMLElement createPostElement(Post post) {
