@@ -73,6 +73,8 @@ public class Main {
             var postElement = createPostElement(post);
             posts.appendChild(postElement);
         }
+
+        System.out.println(postsList.length + "件を取得しました！");
     }
 
     private static HTMLElement createPostElement(Post post) {
