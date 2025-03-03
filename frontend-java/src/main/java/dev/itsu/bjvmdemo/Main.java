@@ -24,7 +24,6 @@ public class Main {
         var textCount = $.document.<HTMLPElement>getElementByIdG("textCount");
         var postButton = $.document.<HTMLButtonElement>getElementByIdG("postButton");
 
-
         newPost.addEventListener("input", new EventListener() {
             @Override
             public void handleEvent(Event evt) {
@@ -66,8 +65,13 @@ public class Main {
             }
         });
 
+        updatePosts();
+    }
+
+    private static void updatePosts() {
         System.out.println("投稿を取得中...");
 
+        var posts = $.document.<HTMLDivElement>getElementByIdG("posts");
         var postsList = $.fetch("api/v1/posts").json(Post[].class);
         for (var post : postsList) {
             var postElement = createPostElement(post);
