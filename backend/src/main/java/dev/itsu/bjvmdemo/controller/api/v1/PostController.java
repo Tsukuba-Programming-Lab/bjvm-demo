@@ -1,31 +1,33 @@
 package dev.itsu.bjvmdemo.controller.api.v1;
 
 import dev.itsu.bjvmdemo.model.Post;
-import dev.itsu.bjvmdemo.repository.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
 @RequestMapping("api/v1")
+@CrossOrigin
 public class PostController {
 
-    private final PostRepository repository;
-
-    public PostController(PostRepository repository) {
-        this.repository = repository;
-    }
+    private long id = 0;
+    private final HashMap<Long, Post> posts = new HashMap<>();
 
     @GetMapping("/posts")
     public List<Post> posts() {
-        return repository.findAll(Sort.by(Sort.Direction.ASC, "date"));
+        return posts.values().stream().toList();
     }
 
     @PutMapping("/post")
     public Post post(@ModelAttribute Post post) {
-        repository.save(post);
+        post.setSId(String.valueOf(id));
+        post.setDate(new Date().toString());
+
+        posts.put(id, post);
+        id++;
+
         return post;
     }
 
