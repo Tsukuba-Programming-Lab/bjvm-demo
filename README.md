@@ -1,5 +1,5 @@
 # bjvm-demo
-PPL2025 用 / デモ bJVM アプリケーション「Chat App | bJVM Demo」
+デモ bJVM アプリケーション「Chat App | bJVM Demo」
 
 ![](screenshot.png)
 
@@ -10,6 +10,8 @@ PPL2025 用 / デモ bJVM アプリケーション「Chat App | bJVM Demo」
     - HTML, JS, CSS などのフロントエンドコード（TypeScript + Vite）
   - frontend-java
     - bJVM アプリケーションコード（Java + Gradle）
+  - backend
+    - バックエンドのサーバ（未使用）
 
 ## 開発
 ### 初回セットアップ
