@@ -37,5 +37,9 @@ tasks.withType<Test> {
 }
 
 tasks.bootJar {
-	archiveFileName.set("app.jar")
+	mainClass.set("dev.itsu.bjvmdemo.BjvmDemoApplication")
+}
+
+tasks.jar {
+	enabled = false
 }

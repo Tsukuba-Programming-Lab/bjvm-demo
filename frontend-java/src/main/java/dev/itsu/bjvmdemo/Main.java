@@ -51,7 +51,7 @@ public class Main {
 
                 System.out.println("投稿中...");
 
-                var post = $.fetch("api/v1/post", RequestInit.builder()
+                var post = $.fetch("http://localhost:8080/api/v1/post", RequestInit.builder()
                         .method("PUT")
                         .body("name=" + nameValue + "&text=" + textValue)
                         .headers(HEADERS)
@@ -72,7 +72,7 @@ public class Main {
         System.out.println("投稿を取得中...");
 
         var posts = $.document.<HTMLDivElement>getElementByIdG("posts");
-        var postsList = $.fetch("api/v1/posts").json(Post[].class);
+        var postsList = $.fetch("http://localhost:8080/api/v1/posts").json(Post[].class);
         var i = 0;
 
         for (var post : postsList) {

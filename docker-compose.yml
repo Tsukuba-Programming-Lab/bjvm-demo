@@ -1,0 +1,80 @@
+# Docker Composeのバージョンを指定
+version: '3.8'
+
+# 起動する各コンテナ（サービス）を定義
+services:
+  # MySQLデータベースサービス
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    # コンテナがクラッシュした場合などに自動で再起動
+    restart: always
+    # 環境変数でMySQLの初期設定を行う
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword # ルートユーザーのパスワード
+      MYSQL_DATABASE: bjvm_demo       # 作成するデータベース名
+      MYSQL_USER: myuser               # 作成するユーザー名
+      MYSQL_PASSWORD: mypassword       # 作成したユーザーのパスワード
+    ports:
+      # ホストの3306番ポートをコンテナの3306番ポートにマッピング
+      # これにより、ホストマシンからDBにアクセス可能になる
+      - "3306:3306"
+    volumes:
+      # 名前付きボリュームをマウントしてデータを永続化
+      - db-data:/var/lib/mysql
+    healthcheck:
+      # DBが正常に起動したかを確認するヘルスチェック
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Spring Bootバックエンドサービス
+  backend:
+    # ./backend ディレクトリのDockerfileを使ってイメージをビルド
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: spring-boot-app
+    restart: always
+    # 環境変数でSpring Bootの設定を上書き
+    environment:
+      # DB接続情報（サービス名`db`をホスト名として指定）
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/bjvm_demo?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=myuser
+      - SPRING_DATASOURCE_PASSWORD=mypassword
+      # アプリケーション起動時にDBスキーマを自動更新
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      # ホストの8080番ポートをコンテナの8080番ポートにマッピング
+      - "8080:8080"
+    # dbサービスが起動してからbackendサービスを起動
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Viteフロントエンドサービス
+  frontend:
+    # ./frontend-js ディレクトリのDockerfileを使ってイメージをビルド
+    build:
+      context: ./frontend-js
+      dockerfile: Dockerfile
+    container_name: vite-app
+    # コンテナの標準入力を開いたままにし、インタラクティブなセッションを維持
+    stdin_open: true
+    tty: true
+    ports:
+      # Viteのデフォルト開発サーバーポート
+      - "5173:5173"
+    volumes:
+      # ホストのソースコードをコンテナにマウントしてホットリロードを有効化
+      - ./frontend-js:/app
+      # ただし、node_modulesはコンテナ内のものを使用（ホスト環境との差異をなくすため）
+      - /app/node_modules
+    # backendサービスが起動してからfrontendサービスを起動
+    depends_on:
+      - backend
+
+# Docker Compose全体で使用するボリュームを定義
+volumes:
+  # DBデータ永続化用の名前付きボリューム
+  db-data:
