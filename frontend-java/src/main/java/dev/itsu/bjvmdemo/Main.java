@@ -15,14 +15,25 @@ public class Main {
         put("Content-Type", "application/x-www-form-urlencoded");
     }};
 
+    private static final HashMap<String, Post> postMap = new HashMap<>();
+    private static int sId = 0;
+
+    private static HTMLDivElement posts = null;
+    private static HTMLTextareaElement newPost = null;
+    private static HTMLInputElement name = null;
+    private static HTMLPElement textCount = null;
+    private static HTMLButtonElement postButton = null;
+
+    static {
+        posts = $.document.<HTMLDivElement>getElementByIdG("posts");
+        newPost = $.document.<HTMLTextareaElement>getElementByIdG("newPost");
+        name = $.document.<HTMLInputElement>getElementByIdG("name");
+        textCount = $.document.<HTMLPElement>getElementByIdG("textCount");
+        postButton = $.document.<HTMLButtonElement>getElementByIdG("postButton");
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello from Main.java!");
-
-        var posts = $.document.<HTMLDivElement>getElementByIdG("posts");
-        var newPost = $.document.<HTMLTextareaElement>getElementByIdG("newPost");
-        var name = $.document.<HTMLInputElement>getElementByIdG("name");
-        var textCount = $.document.<HTMLPElement>getElementByIdG("textCount");
-        var postButton = $.document.<HTMLButtonElement>getElementByIdG("postButton");
 
         newPost.addEventListener("input", new EventListener() {
             @Override
@@ -51,17 +62,27 @@ public class Main {
 
                 System.out.println("投稿中...");
 
-                var post = $.fetch("http://localhost:8080/api/v1/post", RequestInit.builder()
-                        .method("PUT")
-                        .body("name=" + nameValue + "&text=" + textValue)
-                        .headers(HEADERS)
-                        .build()
-                ).json(Post.class);
+//                var post = $.fetch("http://localhost:8080/api/v1/post", RequestInit.builder()
+//                        .method("PUT")
+//                        .body("name=" + nameValue + "&text=" + textValue)
+//                        .headers(HEADERS)
+//                        .build()
+//                ).json(Post.class);
 
+                var post = Post.builder()
+                        .text(textValue)
+                        .name(nameValue)
+                        .date(String.valueOf(System.currentTimeMillis()))
+                        .sId(String.valueOf(sId))
+                        .build();
+
+                postMap.put(String.valueOf(sId), post);
                 var postElement = createPostElement(post);
                 posts.appendChild(postElement);
 
                 System.out.println("投稿完了：" + post.getSId());
+
+                sId++;
             }
         });
 
@@ -71,11 +92,9 @@ public class Main {
     private static void updatePosts() {
         System.out.println("投稿を取得中...");
 
-        var posts = $.document.<HTMLDivElement>getElementByIdG("posts");
-        var postsList = $.fetch("http://localhost:8080/api/v1/posts").json(Post[].class);
-        var i = 0;
-
-        for (var post : postsList) {
+        int i = 0;
+        for (var entry : postMap.entrySet()) {
+            var post = entry.getValue();
             if (post.getText().equals("testdate")) {
                 i++;
                 continue;
@@ -84,7 +103,7 @@ public class Main {
             posts.appendChild(postElement);
         }
 
-        System.out.println((postsList.length  - i) + "件を取得しました！");
+        System.out.println((postMap.size() - i) + "件を取得しました！");
     }
 
     private static HTMLElement createPostElement(Post post) {
@@ -96,7 +115,7 @@ public class Main {
         nameElement.setClassName("name");
         nameElement.setTextContent(post.getName());
 
-        var divElement =  $.document.<HTMLDivElement>createElementG("div");
+        var divElement = $.document.<HTMLDivElement>createElementG("div");
         divElement.appendChild(imgElement);
         divElement.appendChild(nameElement);
 
